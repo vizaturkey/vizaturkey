@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج طلب فيزا تركيا - DD3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: url('https://i2.wp.com/poster1.net/wp-content/uploads/2018/09/1430-3.jpg') center/cover no-repeat;
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    #banner {
+      background: linear-gradient(90deg, #ff0000, #ff4d4d, #ff1a1a, #ff4d4d, #ff0000, #ff1a1a);
+      overflow: hidden;
+      white-space: nowrap;
+      height: 50px;
+      position: relative;
+      border-radius: 0 0 20px 20px;
+      animation: borderGradient 4s linear infinite;
+      box-shadow: 0 0 15px #ff0000;
+      border: 2px solid transparent;
+      background-size: 400% 400%;
+    }
+
+    @keyframes borderGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .scrolling-text {
+      display: inline-block;
+      position: absolute;
+      left: -100%;
+      white-space: nowrap;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 15px 0;
+      background: linear-gradient(90deg, #e0f7ff, #a7d8ff, #d0f0ff, #a7d8ff, #e0f7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      animation: scrollLeft 20s linear infinite, frostColor 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes scrollLeft {
+      0%   { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    @keyframes frostColor {
+      0% { background-position: 0% 50%; filter: drop-shadow(0 0 3px #a7d8ff); }
+      50% { background-position: 100% 50%; filter: drop-shadow(0 0 8px #d0f0ff); }
+      100% { background-position: 0% 50%; filter: drop-shadow(0 0 3px #a7d8ff); }
+    }
+
+    form {
+      background: rgba(0,0,0,0.75);
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    input, select, button {
+      width: 100%;
+      font-family: 'Cairo', sans-serif;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    select {
+      background: linear-gradient(270deg, #ffa07a, #20b2aa, #87cefa, #dda0dd);
+      background-size: 600% 600%;
+      animation: gradientShift 8s ease infinite;
+      color: #fff;
+      border: 1px solid #ccc;
+      transition: transform 0.3s ease;
+    }
+
+    select:hover, select:focus {
+      transform: scale(1.02);
+      outline: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    input:focus {
+      outline: 2px solid #1e90ff;
+      background-color: #f0f8ff;
+      color: #000;
+    }
+
+    button {
+      background: #1e90ff;
+      color: white;
+      cursor: pointer;
+      padding: 14px 0;
+      font-weight: 700;
+      margin-top: 14px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      background: #104e8b;
+      transform: scale(1.02);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      form {
+        margin: 20px 15px;
+        padding: 20px;
+      }
+
+      label {
+        font-size: 0.9rem;
+      }
+
+      input, select, button {
+        font-size: 0.95rem;
+        padding: 9px 10px;
+      }
+
+      button {
+        padding: 12px 0;
+      }
+
+      .scrolling-text {
+        font-size: 0.9rem;
+        padding: 12px 0;
+      }
+    }
+
+    #statusPopup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: none;
+      z-index: 1000;
+    }
+
+    .spinner-text {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-weight: 900;
+      font-size: 2.8rem;
+      animation: spin 1.5s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    .spinner-text span:nth-child(1){ color:#e63946; }
+    .spinner-text span:nth-child(2){ color:#f1faee; }
+    .spinner-text span:nth-child(3){ color:#457b9d; }
+
+    @keyframes spin {
+      0%{ transform: rotate(0deg);}
+      100%{ transform: rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div id="banner">
+    <div class="scrolling-text">
+      يقدم لكم مكتب DD3 افضل الخدمات السياحية والسفر وملف تقديم الفيزا بأفضل الاسعار والضمان
+    </div>
+  </div>
+
+  <form id="dataForm">
+    <div class="form-group">
+      <label>الاسم الكامل</label>
+      <input type="text" id="fullName" required />
+    </div>
+
+    <div class="form-group">
+      <label>تاريخ الميلاد</label>
+      <input type="date" id="birthDate" required />
+    </div>
+
+    <div class="form-group">
+      <label>محافظة الإقامة في العراق</label>
+      <select id="province" required>
+        <option value="">اختر المحافظة</option>
+        <option>بغداد</option>
+        <option>البصرة</option>
+        <option>نينوى</option>
+        <option>أربيل</option>
+        <option>بابل</option>
+        <option>كركوك</option>
+        <option>دهوك</option>
+        <option>الأنبار</option>
+        <option>السليمانية</option>
+        <option>ميسان</option>
+        <option>ذي قار</option>
+        <option>كربلاء</option>
+        <option>صلاح الدين</option>
+        <option>واسط</option>
+        <option>القادسية</option>
+        <option>المثنى</option>
+        <option>حلبجة</option>
+        <option>النجف</option>
+        <option>ديالى</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>مكان الإقامة في تركيا (المدينة)</label>
+      <select id="stayPlace" required>
+        <option value="">اختر المدينة</option>
+        <option>إسطنبول</option>
+        <option>أنقرة</option>
+        <option>إزمير</option>
+        <option>أنطاليا</option>
+        <option>طرابزون</option>
+        <option>بورصة</option>
+        <option>أضنة</option>
+        <option>مرسين</option>
+        <option>غازي عنتاب</option>
+        <option>كونيا</option>
+        <option>شانلي أورفا</option>
+        <option>ديار بكر</option>
+        <option>سامسون</option>
+        <option>هاطاي</option>
+        <option>سيفاس</option>
+        <option>فان</option>
+        <option>موغلا</option>
+        <option>إسكي شهير</option>
+        <option>مالطيا</option>
+        <option>قره بوك</option>
+        <option>هاكاري</option>
+        <option>موش</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>رقم الهاتف</label>
+      <input type="tel" id="phoneNumber" pattern="[0-9]{10,15}" required />
+    </div>
+
+    <div class="form-group">
+      <label>رقم جواز السفر</label>
+      <input type="text" id="passportNumber" required />
+    </div>
+
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input type="email" id="email" required />
+    </div>
+
+    <div class="form-group">
+      <label>الغرض من السفر</label>
+      <select id="travelPurpose" required>
+        <option value="">اختر الغرض</option>
+        <option>سياحة</option>
+        <option>عمل</option>
+        <option>دراسة</option>
+        <option>زيارة عائلية</option>
+        <option>أخرى</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>مدة الإقامة المطلوبة (باليوم)</label>
+      <input type="number" id="stayDuration" min="1" max="365" required />
+    </div>
+
+    <div class="form-group">
+      <label>هل سبق لك السفر إلى تركيا؟</label>
+      <select id="previousVisit" required>
+        <option value="">اختر</option>
+        <option>نعم</option>
+        <option>لا</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>الوظيفة</label>
+      <input type="text" id="job" required />
+    </div>
+
+    <button type="submit" id="submitBtn">إرسال الطلب</button>
+  </form>
+
+  <div id="statusPopup">
+    <div class="spinner-text"><span>D</span><span>D</span><span>3</span></div>
+    <div id="statusText">جاري الإرسال...</div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCfl8CkFQvi8dGYIW8nX-Mc3AcCmldb120",
+      authDomain: "visa-4206d.firebaseapp.com",
+      projectId: "visa-4206d",
+      storageBucket: "visa-4206d.appspot.com",
+      messagingSenderId: "916717740259",
+      appId: "1:916717740259:web:50010ad706ed0332d265d6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('birthDate').max = new Date().toISOString().split('T')[0];
+
+    const form = document.getElementById("dataForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusPopup = document.getElementById("statusPopup");
+    const statusText = document.getElementById("statusText");
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      statusPopup.style.display = "block";
+      statusText.textContent = "جاري الإرسال...";
+
+      try {
+        await addDoc(collection(db, "visaForms"), {
+          fullName: form.fullName.value.trim(),
+          birthDate: form.birthDate.value,
+          province: form.province.value,
+          phoneNumber: form.phoneNumber.value.trim(),
+          passportNumber: form.passportNumber.value.trim(),
+          email: form.email.value.trim(),
+          travelPurpose: form.travelPurpose.value,
+          stayDuration: Number(form.stayDuration.value),
+          stayPlace: form.stayPlace.value,
+          previousVisit: form.previousVisit.value,
+          job: form.job.value.trim(),
+          createdAt: new Date()
+        });
+
+        statusText.textContent = "تم التقديم بنجاح";
+        form.reset();
+        setTimeout(() => {
+          statusPopup.style.display = "none";
+          submitBtn.disabled = false;
+        }, 4000);
+
+      } catch (error) {
+        alert("حدث خطأ أثناء الإرسال. حاول مرة أخرى.");
+        statusPopup.style.display = "none";
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
